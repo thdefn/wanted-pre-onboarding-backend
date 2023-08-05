@@ -21,4 +21,10 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest()
                 .body(new ExceptionResponse(e.getBindingResult().getAllErrors().get(0).getDefaultMessage()));
     }
+
+    @ExceptionHandler({Exception.class})
+    public ResponseEntity<ExceptionResponse> handleException(Exception e){
+        return ResponseEntity.internalServerError()
+                .body(new ExceptionResponse(e.getMessage()));
+    }
 }

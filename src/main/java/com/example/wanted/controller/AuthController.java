@@ -1,6 +1,9 @@
 package com.example.wanted.controller;
 
+import com.example.wanted.dto.SignInForm;
 import com.example.wanted.dto.SignUpForm;
+import com.example.wanted.dto.TokenDto;
+import com.example.wanted.dto.TokenRefreshForm;
 import com.example.wanted.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +23,17 @@ public class AuthController {
 
     @PostMapping("/sign-up")
     private ResponseEntity<Void> register(@Valid @RequestBody SignUpForm form) {
-        log.error(form.getEmail());
         authService.register(form);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/sign-in")
+    private ResponseEntity<TokenDto> login(@Valid @RequestBody SignInForm form) {
+        return ResponseEntity.ok(authService.login(form));
+    }
+
+    @PostMapping("/reissue")
+    private ResponseEntity<TokenDto> reissue(@Valid @RequestBody TokenRefreshForm form) {
+        return ResponseEntity.ok(authService.reissue(form.getRefreshToken()));
     }
 }
