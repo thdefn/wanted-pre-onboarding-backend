@@ -1,4 +1,4 @@
-package com.trip.diary.domain.model;
+package com.example.wanted.domain.model;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class BaseEntity {
+public abstract class BaseEntity {
     @CreatedDate
     private LocalDateTime createdAt;
 
