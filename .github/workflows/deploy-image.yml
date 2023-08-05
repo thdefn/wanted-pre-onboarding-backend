@@ -11,8 +11,8 @@ jobs:
       - name: Checkout
         uses: actions/setup-java@v3
         with:
-          - java-version: '17'
-          - distribution: 'temurin'
+          java-version: '17'
+          distribution: 'temurin'
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
