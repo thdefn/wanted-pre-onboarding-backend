@@ -6,6 +6,7 @@ import com.example.wanted.security.UserDetailsImpl;
 import com.example.wanted.service.PostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,18 @@ public class PostController {
     @PutMapping("/{postId}")
     private ResponseEntity<PostDto> update(@Valid @RequestBody PostForm form,
                                            @PathVariable Long postId,
-                                           @AuthenticationPrincipal UserDetailsImpl user){
+                                           @AuthenticationPrincipal UserDetailsImpl user) {
         return ResponseEntity.ok(postService.update(postId, form, user.getMember()));
+    }
+
+    @GetMapping
+    private ResponseEntity<Page<PostDto>> read(@RequestParam(required = false, defaultValue = "0") int page) {
+        return ResponseEntity.ok(postService.read(page));
+    }
+
+    @GetMapping("/{postId}")
+    private ResponseEntity<PostDto> detail(@PathVariable Long postId,
+                                           @AuthenticationPrincipal UserDetailsImpl user) {
+        return ResponseEntity.ok(postService.detail(postId, user.getMember()));
     }
 }
