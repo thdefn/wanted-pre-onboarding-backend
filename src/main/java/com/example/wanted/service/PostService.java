@@ -51,4 +51,14 @@ public class PostService {
                         .orElseThrow(() -> new PostException(POST_NOT_FOUND)),
                 member.getId());
     }
+
+    @Transactional
+    public void delete(Long postId, Member member) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new PostException(POST_NOT_FOUND));
+        if (!Objects.equals(member.getId(), post.getWriter().getId()))
+            throw new PostException(ErrorCode.MEMBER_NOT_WRITER);
+
+        postRepository.delete(post);
+    }
 }

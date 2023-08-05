@@ -40,4 +40,11 @@ public class PostController {
                                            @AuthenticationPrincipal UserDetailsImpl user) {
         return ResponseEntity.ok(postService.detail(postId, user.getMember()));
     }
+
+    @DeleteMapping("/{postId}")
+    private ResponseEntity<Void> delete(@PathVariable Long postId,
+                                        @AuthenticationPrincipal UserDetailsImpl user) {
+        postService.delete(postId, user.getMember());
+        return ResponseEntity.ok().build();
+    }
 }
