@@ -290,4 +290,18 @@ class PostControllerTest {
                 .andExpect(jsonPath("$.nickName").value("익명"));
     }
 
+    @Test
+    @WithMockCustomUser
+    void 게시물_삭제_성공() throws Exception {
+        //given
+        //when
+        //then
+        mockMvc.perform(delete("/posts/{postId}", 1L)
+                        .header("Authorization", TOKEN)
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
 }

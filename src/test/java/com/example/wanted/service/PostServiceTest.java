@@ -232,4 +232,52 @@ class PostServiceTest {
         assertEquals(POST_NOT_FOUND, exception.getErrorCode());
     }
 
+    @Test
+    void 게시물_삭제_성공() {
+        //given
+        given(postRepository.findById(any()))
+                .willReturn(Optional.of(Post.builder()
+                        .id(1L)
+                        .title("류승완 신작 ‘밀수’, 개봉 11일 만에 300만 돌파")
+                        .content("무더위기 기승을 부리는 올여름 시원한 바다가 배경인 영화 ‘밀수’가 300만 관객을 돌파했다.")
+                        .writer(member)
+                        .createdAt(LocalDateTime.now())
+                        .build()));
+        //when
+        postService.delete(1L, member);
+        //then
+        verify(postRepository, times(1)).delete(any());
+    }
+
+    @Test
+    void 게시물_삭제_실패_게시물이_존재하지_않음() {
+        //given
+        given(postRepository.findById(any())).willReturn(Optional.empty());
+        //when
+        PostException exception = assertThrows(PostException.class,
+                () -> postService.delete(1L, member));
+        //then
+        assertEquals(POST_NOT_FOUND, exception.getErrorCode());
+    }
+
+    @Test
+    void 게시물_삭제_실패_작성자가_아님() {
+        //given
+        Member writer = Member.builder()
+                .id(2L)
+                .build();
+        given(postRepository.findById(any()))
+                .willReturn(Optional.of(Post.builder()
+                        .id(1L)
+                        .title("류승완 신작 ‘밀수’, 개봉 11일 만에 300만 돌파")
+                        .content("무더위기 기승을 부리는 올여름 시원한 바다가 배경인 영화 ‘밀수’가 300만 관객을 돌파했다.")
+                        .writer(writer)
+                        .build()));
+        //when
+        PostException exception = assertThrows(PostException.class,
+                () -> postService.delete(1L, member));
+        //then
+        assertEquals(ErrorCode.MEMBER_NOT_WRITER, exception.getErrorCode());
+    }
+
 }
