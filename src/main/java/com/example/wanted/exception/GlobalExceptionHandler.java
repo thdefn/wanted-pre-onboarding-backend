@@ -16,6 +16,13 @@ public class GlobalExceptionHandler {
                 .body(new ExceptionResponse(e.getMessage()));
     }
 
+    @ExceptionHandler({PostException.class})
+    public ResponseEntity<ExceptionResponse> handlePostException(PostException e) {
+        log.warn("post exception : {}", e.getErrorCode());
+        return ResponseEntity.status(e.getErrorCode().getHttpStatus())
+                .body(new ExceptionResponse(e.getMessage()));
+    }
+
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public ResponseEntity<ExceptionResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
         return ResponseEntity.badRequest()
