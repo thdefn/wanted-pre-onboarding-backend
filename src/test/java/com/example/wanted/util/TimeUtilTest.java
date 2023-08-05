@@ -1,6 +1,5 @@
 package com.example.wanted.util;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
