@@ -33,8 +33,6 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/wanted:latest
-          cache-from: type=gha
-          cache-to: type=gha, mode=max
 
       - name: Deploy
         uses: appleboy/ssh-action@master
