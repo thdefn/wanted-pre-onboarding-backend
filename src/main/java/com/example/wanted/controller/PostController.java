@@ -21,4 +21,11 @@ public class PostController {
                                            @AuthenticationPrincipal UserDetailsImpl user) {
         return ResponseEntity.ok(postService.create(form, user.getMember()));
     }
+
+    @PutMapping("/{postId}")
+    private ResponseEntity<PostDto> update(@Valid @RequestBody PostForm form,
+                                           @PathVariable Long postId,
+                                           @AuthenticationPrincipal UserDetailsImpl user){
+        return ResponseEntity.ok(postService.update(postId, form, user.getMember()));
+    }
 }

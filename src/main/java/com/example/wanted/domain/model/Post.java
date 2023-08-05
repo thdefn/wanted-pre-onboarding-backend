@@ -1,5 +1,6 @@
 package com.example.wanted.domain.model;
 
+import com.example.wanted.dto.PostForm;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,4 +23,9 @@ public class Post extends BaseEntity {
 
     @ManyToOne
     private Member writer;
+
+    public void update(PostForm form) {
+        this.title = form.getTitle();
+        this.content = form.getContent();
+    }
 }
