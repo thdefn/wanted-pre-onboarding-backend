@@ -16,13 +16,15 @@ public class PostDto {
     private String content;
     @Builder.Default
     private String nickName = "익명";
-    private boolean isReadersPost;
+    private Long writerId;
+    private Boolean isReadersPost;
 
-    public static PostDto of(Post post, Long readerId){
+    public static PostDto of(Post post, Long readerId) {
         return PostDto.builder()
                 .postId(post.getId())
                 .title(post.getTitle())
                 .content(post.getContent())
+                .writerId(post.getWriter().getId())
                 .isReadersPost(post.getWriter().isReader(readerId))
                 .build();
     }

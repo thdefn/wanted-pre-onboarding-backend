@@ -18,6 +18,7 @@ public class WithMockCustomUserSecurityContextFactory implements WithSecurityCon
             .id(1L)
             .email("abcde@gmail.com")
             .password("12345678")
+            .type(MemberType.USER)
             .build();
 
     @Override
