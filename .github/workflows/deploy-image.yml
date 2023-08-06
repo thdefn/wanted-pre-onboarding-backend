@@ -42,5 +42,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script:
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/wanted:latest
-            docker container run -d -p 8080:8080 --network wanted-net --name webapp ${{ secrets.DOCKERHUB_USERNAME }}/wanted:latest
+            docker container run -d --name webapp --network default_wanted-net -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/wanted:latest
             docker image prune -a -f
