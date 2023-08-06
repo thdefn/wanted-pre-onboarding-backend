@@ -38,7 +38,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
-          username: github
+          username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script:
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/wanted:latest
