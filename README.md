@@ -34,7 +34,12 @@ Host : `34.64.48.240:8080`
 
 ### 1. 서버 도식화
 
+<img src="https://github.com/thdefn/wanted-pre-onboarding-backend/assets/80521474/54d6f41f-87b1-4b70-a899-76632d1fa348" width="700" height="400"/>
+
+
 ### 2. 데이터베이스 테이블 구조
+<img src="https://github.com/thdefn/wanted-pre-onboarding-backend/assets/80521474/610b9ad9-f6f4-4340-8e16-50bde9f12cf5" width="400" height="250"/>
+
 
 ### 3. 소스 코드 구조
 
