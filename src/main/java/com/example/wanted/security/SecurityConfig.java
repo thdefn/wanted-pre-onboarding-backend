@@ -46,7 +46,7 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(authorize ->
                         authorize
-                                .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/auth/**", "/pages/**").permitAll()
                                 .requestMatchers("/**").hasAnyAuthority(MemberType.USER.name())
                                 .requestMatchers(PathRequest.toH2Console()).permitAll()
                 )
